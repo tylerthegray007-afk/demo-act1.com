@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATC Company | Ultra-Luxury Real Estate Pakistan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --champagne: #C5A059;
+            --soft-champagne: #F4EBD0;
+            --slate: #2C3E50;
+            --light-slate: #708090;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--white);
+            color: var(--slate);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .luxury-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .bg-champagne { background-color: var(--champagne); }
+        .text-champagne { color: var(--champagne); }
+        .border-champagne { border-color: var(--champagne); }
+
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+        }
+
+        .property-card:hover .zoom-img {
+            transform: scale(1.1);
+        }
+
+        .transition-smooth {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: var(--champagne); }
+
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav border-b border-gray-100 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <div class="text-2xl font-black tracking-tighter luxury-font">
+                ATC <span class="text-champagne">COMPANY</span>
+            </div>
+        </div>
+        <div class="hidden md:flex space-x-8 font-medium text-sm uppercase tracking-widest">
+            <a href="#home" class="hover:text-champagne transition-smooth">Home</a>
+            <a href="#properties" class="hover:text-champagne transition-smooth">Properties</a>
+            <a href="#locations" class="hover:text-champagne transition-smooth">Locations</a>
+            <a href="#about" class="hover:text-champagne transition-smooth">About</a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="tel:+923215211097" class="hidden md:block bg-slate-800 text-white px-6 py-2 rounded-full text-xs font-bold hover:bg-champagne transition-smooth">
+                CALL NOW
+            </a>
+            <button class="md:hidden text-2xl"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000" class="w-full h-full object-cover zoom-animation" alt="Luxury Mansion">
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+        
+        <div class="relative z-10 text-center text-white px-4 max-w-5xl">
+            <h1 class="text-5xl md:text-8xl font-bold mb-6 opacity-0 translate-y-10 hero-title">
+                Premium Real Estate <br><span class="text-champagne italic">Experience</span> in Pakistan
+            </h1>
+            <p class="text-lg md:text-2xl mb-10 font-light tracking-wide opacity-0 hero-subtitle">
+                Connecting Buyers & Investors with Verified Luxury Properties
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4 opacity-0 hero-buttons">
+                <a href="#properties" class="bg-champagne text-white px-10 py-4 rounded-full font-bold hover:bg-white hover:text-slate-900 transition-smooth">EXPLORE PROPERTIES</a>
+                <a href="#contact" class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-10 py-4 rounded-full font-bold hover:bg-white hover:text-slate-900 transition-smooth">BOOK A VISIT</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Filters -->
+    <section id="properties" class="py-20 px-6 bg-[#FDFBF7]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-4">Featured Portfolio</h2>
+                <div class="w-24 h-1 bg-champagne mx-auto"></div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button onclick="filterProps('all')" class="filter-btn active bg-champagne text-white px-6 py-2 rounded-full text-sm font-bold">ALL</button>
+                <button onclick="filterProps('dha')" class="filter-btn border border-gray-200 px-6 py-2 rounded-full text-sm font-bold hover:border-champagne">DHA ISLAMABAD</button>
+                <button onclick="filterProps('bahria')" class="filter-btn border border-gray-200 px-6 py-2 rounded-full text-sm font-bold hover:border-champagne">BAHRIA TOWN</button>
+                <button onclick="filterProps('commercial')" class="filter-btn border border-gray-200 px-6 py-2 rounded-full text-sm font-bold hover:border-champagne">COMMERCIAL</button>
+            </div>
+
+            <!-- Property Grid -->
+            <div id="property-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="property-card bg-white group overflow-hidden shadow-sm hover:shadow-2xl transition-smooth" data-type="dha">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-smooth zoom-img" alt="DHA House">
+                        <div class="absolute top-4 left-4 bg-champagne text-white px-3 py-1 text-xs font-bold tracking-widest uppercase">Verified</div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2">1 Kanal Modern Villa</h3>
+                        <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot text-champagne mr-2"></i>DHA Phase 2, Islamabad</p>
+                        <div class="flex justify-between items-center border-t border-gray-100 pt-6">
+                            <span class="text-xl font-bold text-slate-800">₨ 160,000,000</span>
+                            <button onclick="openMap('DHA Phase 2 Islamabad')" class="text-champagne font-bold text-sm hover:underline">VIEW ON MAP</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="property-card bg-white group overflow-hidden shadow-sm hover:shadow-2xl transition-smooth" data-type="bahria">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-smooth zoom-img" alt="Bahria House">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2">Designer Mansion</h3>
+                        <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot text-champagne mr-2"></i>Bahria Town Phase 7, Rawalpindi</p>
+                        <div class="flex justify-between items-center border-t border-gray-100 pt-6">
+                            <span class="text-xl font-bold text-slate-800">₨ 137,500,000</span>
+                            <button onclick="openMap('Bahria Town Phase 7 Rawalpindi')" class="text-champagne font-bold text-sm hover:underline">VIEW ON MAP</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="property-card bg-white group overflow-hidden shadow-sm hover:shadow-2xl transition-smooth" data-type="dha">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-smooth zoom-img" alt="Plot">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2">1 Kanal Residential Plot</h3>
+                        <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot text-champagne mr-2"></i>DHA Phase 5, Islamabad</p>
+                        <div class="flex justify-between items-center border-t border-gray-100 pt-6">
+                            <span class="text-xl font-bold text-slate-800">₨ 32,500,000</span>
+                            <button onclick="openMap('DHA Phase 5 Islamabad')" class="text-champagne font-bold text-sm hover:underline">VIEW ON MAP</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Section -->
+    <section class="h-96 parallax-bg flex items-center justify-center relative" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000');">
+        <div class="absolute inset-0 bg-slate-900/60"></div>
+        <div class="relative z-10 text-center text-white px-4">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Invest in the Future of Islamabad</h2>
+            <p class="text-xl font-light italic">Secure, Transparent, and Luxury Driven Property Management</p>
+        </div>
+    </section>
+
+    <!-- Mission & About -->
+    <section id="about" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+            <div class="lg:w-1/2">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800" class="rounded-lg shadow-2xl relative z-10" alt="Office">
+                    <div class="absolute -bottom-6 -right-6 w-64 h-64 bg-soft-champagne -z-10 rounded-lg"></div>
+                </div>
+            </div>
+            <div class="lg:w-1/2">
+                <span class="text-champagne font-bold tracking-widest uppercase text-sm">Our Mission</span>
+                <h2 class="text-4xl md:text-5xl font-bold my-6">Abdullah Trading Co. (ATC)</h2>
+                <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                    At ATC Company, we bridge the gap between premium lifestyle and secure investment. Specializing in **DHA and Bahria Town**, we provide a full-spectrum service—from property selection and legal verification to final transfer. Our commitment is transparency in every transaction.
+                </p>
+                <ul class="space-y-4 mb-10">
+                    <li class="flex items-center gap-3 font-semibold"><i class="fa-solid fa-check text-champagne"></i> 100% Verified Property Portfolio</li>
+                    <li class="flex items-center gap-3 font-semibold"><i class="fa-solid fa-check text-champagne"></i> Professional Legal Documentation</li>
+                    <li class="flex items-center gap-3 font-semibold"><i class="fa-solid fa-check text-champagne"></i> High-ROI Investment Consulting</li>
+                </ul>
+                <div class="grid grid-cols-2 gap-8 border-t border-gray-100 pt-8">
+                    <div>
+                        <h4 class="text-3xl font-bold text-champagne">15+</h4>
+                        <p class="text-sm text-gray-500 uppercase font-bold">Years Experience</p>
+                    </div>
+                    <div>
+                        <h4 class="text-3xl font-bold text-champagne">500+</h4>
+                        <p class="text-sm text-gray-500 uppercase font-bold">Properties Sold</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Generation Form -->
+    <section id="contact" class="py-20 px-6 bg-slate-900 text-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-4">Book a Private Viewing</h2>
+            <p class="text-gray-400 mb-12 italic">Let our experts guide you to your next luxury investment.</p>
+            
+            <form class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-widest mb-2">Full Name</label>
+                    <input type="text" class="w-full bg-white/5 border border-white/20 px-4 py-3 rounded focus:border-champagne outline-none transition-smooth" placeholder="John Doe">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-widest mb-2">Phone Number</label>
+                    <input type="tel" class="w-full bg-white/5 border border-white/20 px-4 py-3 rounded focus:border-champagne outline-none transition-smooth" placeholder="+92 3XX XXXXXXX">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-xs font-bold uppercase tracking-widest mb-2">Property of Interest</label>
+                    <select class="w-full bg-white/5 border border-white/20 px-4 py-3 rounded focus:border-champagne outline-none transition-smooth">
+                        <option class="bg-slate-900">DHA Luxury Villa</option>
+                        <option class="bg-slate-900">Bahria Town Mansion</option>
+                        <option class="bg-slate-900">Commercial Plot</option>
+                        <option class="bg-slate-900">Other Investment</option>
+                    </select>
+                </div>
+                <div class="md:col-span-2">
+                    <button class="w-full bg-champagne py-4 rounded font-bold uppercase tracking-widest hover:bg-white hover:text-slate-900 transition-smooth">Request Details</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-16 px-6 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="col-span-1 md:col-span-1">
+                <div class="text-2xl font-black luxury-font mb-6">ATC <span class="text-champagne">COMPANY</span></div>
+                <p class="text-gray-500 text-sm leading-relaxed">Defining premium real estate standards in Pakistan since 2010.</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 uppercase text-xs tracking-widest">Head Office</h4>
+                <p class="text-gray-500 text-sm">
+                    Jinnah Boulevard, Sector E,<br>
+                    DHA Phase 2, Islamabad,<br>
+                    Pakistan.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 uppercase text-xs tracking-widest">Inquiries</h4>
+                <p class="text-gray-500 text-sm">
+                    ghulam.haider@atccompany.pk<br>
+                    +92 321 521 1097
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 uppercase text-xs tracking-widest">Follow Us</h4>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-champagne transition-smooth"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-champagne transition-smooth"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-champagne transition-smooth"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-gray-100 mt-16 pt-8 text-center text-gray-400 text-xs">
+            © 2024 Abdullah Trading Co. All Rights Reserved. Luxury Real Estate Pakistan.
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating -->
+    <a href="https://wa.me/923215211097" class="fixed bottom-8 right-8 bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-2xl z-50 hover:scale-110 transition-smooth">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Map Modal (Simplified) -->
+    <div id="map-modal" class="fixed inset-0 bg-black/90 z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-4xl h-[600px] relative rounded-lg overflow-hidden">
+            <button onclick="closeMap()" class="absolute top-4 right-4 bg-black text-white w-10 h-10 rounded-full z-10">&times;</button>
+            <iframe id="map-frame" class="w-full h-full border-none" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        window.onload = () => {
+            const tl = gsap.timeline();
+            tl.to(".hero-title", { opacity: 1, y: 0, duration: 1, ease: "power4.out" })
+              .to(".hero-subtitle", { opacity: 1, y: 0, duration: 1, ease: "power4.out" }, "-=0.6")
+              .to(".hero-buttons", { opacity: 1, y: 0, duration: 1, ease: "power4.out" }, "-=0.6");
+
+            gsap.from(".property-card", {
+                scrollTrigger: {
+                    trigger: "#property-grid",
+                    start: "top 80%"
+                },
+                y: 100,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2
+            });
+        };
+
+        // Filter Logic
+        function filterProps(type) {
+            const cards = document.querySelectorAll('.property-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-champagne', 'text-white');
+                btn.classList.add('border', 'border-gray-200');
+            });
+            event.target.classList.add('bg-champagne', 'text-white');
+
+            cards.forEach(card => {
+                if(type === 'all' || card.dataset.type === type) {
+                    card.style.display = 'block';
+                    gsap.fromTo(card, {opacity: 0, scale: 0.9}, {opacity: 1, scale: 1, duration: 0.5});
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Map Logic
+        function openMap(location) {
+            const modal = document.getElementById('map-modal');
+            const frame = document.getElementById('map-frame');
+            const query = encodeURIComponent(location);
+            frame.src = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY_HERE&q=${query}`;
+            // Note: Replace YOUR_API_KEY_HERE with a real key or use standard embed link:
+            frame.src = `https://maps.google.com/maps?q=${query}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+            modal.classList.remove('hidden');
+        }
+
+        function closeMap() {
+            document.getElementById('map-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
